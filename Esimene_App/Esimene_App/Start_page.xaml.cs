@@ -15,7 +15,7 @@ namespace Esimene_App
     {
         public start_page()
         {
-           InitializeComponent();
+            InitializeComponent();
             Button Entry_btn = new Button
             {
                 Text = "Ava Entry leht",
@@ -41,11 +41,24 @@ namespace Esimene_App
                 TextColor = Color.Black,
                 BackgroundColor = Color.Violet
             };
+            Button Date_btn = new Button
+            {
+                Text = "Ava Date/Time leht",
+                TextColor = Color.Black,
+                BackgroundColor = Color.Violet
+            };
+            Button Step_btn = new Button
+            {
+                Text = "Stepper/Slider",
+                TextColor = Color.Black,
+                BackgroundColor = Color.Violet
+            };
+
 
             StackLayout st = new StackLayout
             {
                 Orientation = StackOrientation.Vertical,
-                Children = { Entry_btn, Timer_btn, Box_btn, Valgusfoor_btn },
+                Children = { Entry_btn, Timer_btn, Box_btn, Valgusfoor_btn, Date_btn, Step_btn },
                 BackgroundColor = Color.Yellow
             };
             Content = st;
@@ -53,6 +66,20 @@ namespace Esimene_App
             Timer_btn.Clicked += Timer_btn_Clicked;
             Box_btn.Clicked += Box_btn_Clicked;
             Valgusfoor_btn.Clicked += Valgusfoor_btn_Clicked1;
+            Date_btn.Clicked += Date_btn_Clicked;
+            Step_btn.Clicked += Step_btn_Clicked;
+        
+        
+        }
+        private async void Step_btn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new StepperSlider_Page());
+        }
+
+
+        private async void Date_btn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DateTime_Page());
         }
 
         private async void Valgusfoor_btn_Clicked1(object sender, EventArgs e)
