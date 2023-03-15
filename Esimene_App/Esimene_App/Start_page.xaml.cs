@@ -13,97 +13,43 @@ namespace Esimene_App
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class start_page : ContentPage
     {
+
+        List<ContentPage> pages = new List<ContentPage>() {new Entry_page(),new Timer_Page(), new BoxView_Page(),
+            new Valgusfoor(), new StepperSlider_Page(), new DateTime_Page(), new Frame_page(),
+            new Image_page()};
+        List<string> tekstid = new List<string> { "Ava Entry leht","Ava Timer leht", "Ava BoxView leht",
+            "Ava Valgusfoor leht", "Ava StepperSlider leht", "Ava DateTime leht", "Ava Frame leht", "Ava Image leht"};
         public start_page()
         {
-            InitializeComponent();
-            Button Entry_btn = new Button
-            {
-                Text = "Ava Entry leht",
-                TextColor = Color.Black,
-                BackgroundColor = Color.Violet
-            };
-            Button Timer_btn = new Button
-            {
-                Text = "Ava Timer leht",
-                TextColor = Color.Black,
-                BackgroundColor = Color.Violet
-            };
-            Button Box_btn = new Button
-            {
-                Text = "Ava BoxView leht",
-                TextColor = Color.Black,
-                BackgroundColor = Color.Violet
-            };
-
-            Button Valgusfoor_btn = new Button
-            {
-                Text = "Valgusfoor",
-                TextColor = Color.Black,
-                BackgroundColor = Color.Violet
-            };
-            Button Date_btn = new Button
-            {
-                Text = "Ava Date/Time leht",
-                TextColor = Color.Black,
-                BackgroundColor = Color.Violet
-            };
-            Button Step_btn = new Button
-            {
-                Text = "Stepper/Slider",
-                TextColor = Color.Black,
-                BackgroundColor = Color.Violet
-            };
-
-
             StackLayout st = new StackLayout
             {
                 Orientation = StackOrientation.Vertical,
-                Children = { Entry_btn, Timer_btn, Box_btn, Valgusfoor_btn, Date_btn, Step_btn },
-                BackgroundColor = Color.Yellow
+                BackgroundColor = Color.HotPink,
             };
+            for (int i = 0; i < pages.Count; i++)
+            {
+                Button button = new Button
+                {
+                    Text = tekstid[i],
+                    TabIndex = i,
+                    TextColor = Color.Black,
+                    BackgroundColor = Color.LavenderBlush,
+                };
+
+                st.Children.Add(button);
+                button.Clicked += Navig_funktsioon;
+            }
             Content = st;
-            Entry_btn.Clicked += Entry_btn_Clicked;
-            Timer_btn.Clicked += Timer_btn_Clicked;
-            Box_btn.Clicked += Box_btn_Clicked;
-            Valgusfoor_btn.Clicked += Valgusfoor_btn_Clicked1;
-            Date_btn.Clicked += Date_btn_Clicked;
-            Step_btn.Clicked += Step_btn_Clicked;
-        
-        
-        }
-        private async void Step_btn_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new StepperSlider_Page());
         }
 
-
-        private async void Date_btn_Clicked(object sender, EventArgs e)
+        private async void Navig_funktsioon(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new DateTime_Page());
+            Button btn = sender as Button;
+            await Navigation.PushAsync(pages[btn.TabIndex]);
         }
 
-        private async void Valgusfoor_btn_Clicked1(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync( new Valgusfoor());
-        }
-
- 
-        private async void Box_btn_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new BoxView_Page());
-        }
-
-        private async void Timer_btn_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Timer_Page());
-        }
-
-        private async void Entry_btn_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Entry_page());
-        }
-        
-        
-        
     }
 }
+
+
+
